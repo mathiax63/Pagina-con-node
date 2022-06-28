@@ -34,6 +34,19 @@ h1{
     padding: 10px;
     
 }
+.DelAdmin{
+margin-top: 5px;
+width: 35%;
+}
+.divDeAdminA{
+    margin-left: 30px;
+}
+.h3DelA{
+    justify-content: start;
+}
+.divContenedorDeH3{
+    margin: 25px 15px;
+}
 header{
     background-color: rgb(42, 99, 99);
     margin: 0px 30px;
