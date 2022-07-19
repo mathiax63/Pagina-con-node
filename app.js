@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require("dotenv").config();
+let pool = require("./models/bd")
+
 let session = require("express-session")
 
 var indexRouter = require('./routes/index');
@@ -77,6 +80,35 @@ app.use('/todasLasPeliculas', todosRouter);
 app.use('/detalle', especificoRouter);
 app.use('/paginasParaVer', plataformaRouter);
 app.use("/admin/agregar", adminRouter)
+
+//mostrar todos los datos
+pool.query("select * from peliculas").then(function(resultados){
+  console.log(resultados)
+})
+
+//insertar
+/*
+let obj = {
+  titulo: "spider man no way home",
+  sinopsis: "Tras descubrirse la identidad secreta de Peter Parker como Spider-Man, la vida del joven se vuelve una locura. Peter decide pedirle ayuda al Doctor Extraño para recuperar su vida. Pero algo sale mal y provoca una fractura en el multiverso.",
+  imagenes: "img/spidermanNWH.jpg.webp",
+  trailer: "https://youtu.be/SkmRT3M4Vx4",
+  etiquetas: "Ficcion,Aventura,Accion,Superheroes",
+  estrellas: 5,
+  estreno: "2021-12-17",
+  plataformasparaver:"Cuevana, Disney plus"
+}
+pool.query("insert into peliculas set ?", [obj]).then(function(resultado){
+  console.log(resultado)
+})
+*/
+
+
+//borrar
+let id= 4;
+pool.query("delete from peliculas where id=?",[id]).then(function(resultado){
+console.log(resultado)
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
