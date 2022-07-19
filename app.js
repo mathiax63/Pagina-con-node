@@ -105,10 +105,12 @@ pool.query("insert into peliculas set ?", [obj]).then(function(resultado){
 
 
 //borrar
+/*
 let id= 4;
 pool.query("delete from peliculas where id=?",[id]).then(function(resultado){
 console.log(resultado)
 })
+*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
