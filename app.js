@@ -15,7 +15,7 @@ var loginRouter = require('./routes/login');
 var todosRouter = require('./routes/todasP');
 var especificoRouter = require('./routes/detalle');
 var plataformaRouter = require('./routes/plataformas');
-let adminRouter = require("./routes/admin/agregar")
+let adminRouter = require("./routes/admin/admin")
 
 
 var app = express();
@@ -32,22 +32,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   secret:"asdwadgtvbvcjkebytsk",
+  cookie:{ maxAge: null },
   resave: false,
   saveUninitialized: true
 }));
 
 
-app.get("/admin/agregar",function (req, res){
-  var conocido = Boolean(req.session.nombre);
-//console.log("estoy?"+conocido)
-  res.render("admin/agregar", {
-    title: "Zona de administracion",
-    conocido: conocido,
-    nombre: req.session.nombre,
-    email: req.session.email
-  })
-})
 
+
+/*
 app.post("/ingresar", function (req, res){
   //console.log("estoy?"+conocido)
 if(req.body.email){
@@ -60,32 +53,55 @@ if(req.body.email){
   }
   res.redirect("admin/agregar");
 })
+*/
 
 
 
 
 
-app.get("/salir", function (req, res){
-  req.session.destroy();
-  res.redirect("/")
-})
 
+
+ secured = async (req, res, next) => {  
+  try {
+     console.log(req.session.id_usuario);
+    if (req.session.id_usuario != undefined) {
+      next();
+    } else {
+      res.redirect("/login");
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+/*app.get("/admin/admin",function (req, res){
+  var conocido = Boolean(req.session.nombre);
+  res.render("admin/admin", {
+    title: "Zona de administracion",
+    conocido: conocido,
+    nombre: req.session.nombre,
+    email: req.session.email
+  })
+})*/
 
 
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/admin', loginRouter);
+app.use('/login', loginRouter);
 app.use('/todasLasPeliculas', todosRouter);
 app.use('/detalle', especificoRouter);
 app.use('/paginasParaVer', plataformaRouter);
-app.use("/admin/agregar", adminRouter)
+app.use("/admin/admin",secured, adminRouter)
+
+
 
 //mostrar todos los datos
+/*
 pool.query("select * from peliculas").then(function(resultados){
   console.log(resultados)
 })
-
+*/
 //insertar
 /*
 let obj = {
