@@ -419,8 +419,78 @@ label{
             color: black;
             font-size: 30px;
         }
+        section.categorias div input {
+            border: none;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+            width: 100%;
+            padding: 5px;
+            height: 40px;
+        }
+        
+        section.categorias div select {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 7px;
+            padding: 5px;
+        }
+        .producto-similar1 div.precio-producto,
+.producto-similar2 div.precio-producto,
+.producto-similar3 div.precio-producto,
+.producto-similar4 div.precio-producto {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: all 1s;
+}
 
+.producto-similar1:hover div.precio-producto,
+.producto-similar2:hover div.precio-producto,
+.producto-similar3:hover div.precio-producto,
+.producto-similar4:hover div.precio-producto,
+.producto-similar1:hover div.nombre-producto,
+.producto-similar2:hover div.nombre-producto,
+.producto-similar3:hover div.nombre-producto,
+.producto-similar4:hover div.nombre-producto {
+    opacity: 1;
+    box-shadow: 0px 0px 3px rgb(100, 100, 100);
+}
+        
+main.carga-productos section article.carga-fotos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 20px;
+    max-width: 700px;
+    width: 100%;
+}
 
+main.carga-productos section article.carga-fotos input {
+    margin-left: 15px;
+    padding: 5px;
+}
+.carga-fotos{
+    padding: 20px;
+    margin: 15px;
+}
+#imagenP{
+    
+    height: auto;
+    width: auto;
+}
+.Datos-producto{
+    display: block;
+}
+.checkbox{
+margin: 10px 5px;
+}
 
 
 
