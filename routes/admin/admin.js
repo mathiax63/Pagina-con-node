@@ -30,9 +30,9 @@ router.get("/agregar", function (req, res){
   })
 })
 
-router.post("/agregar", async(req, res, next) =>{
+router.post("/agregar", async function(req, res, next) {
 try{
-  if(req.body.Titulo != "" && req.body.Sinopsis != "" && req.body.casilla != ""){
+  if(req.body.titulo != "" && req.body.sinopsis != "" && req.body.etiquetas != ""){
     await todasLasPeliculasModel.agregarProducto(req.body);
     res.redirect("/admin/agregar")
   } else {
@@ -50,5 +50,46 @@ try{
   })
 }
 })
+
+router.get("/eliminar/:id", async(req, res, next) =>{
+  let id = req.params.id;
+  await todasLasPeliculasModel.borrar(id);
+  res.redirect("/admin/admin")
+})
+
+router.get("/editar/:id", async (req, res, next) =>{
+  let id = req.params.id;
+  console.log(req.params.id);
+  let producto = await todasLasPeliculasModel.actualizar(id)
+  console.log(req.params.id)
+  res.render("admin/editar", {
+    layout: "admin/layout",
+    producto
+  })
+})
+
+router.post("/editar", async (req, res, next) =>{
+  try{
+    let obj = {
+      titulo: req.body.titulo,
+      sinopsis: req.body.sinopsis,
+      estrellas: req.body.estrellas,
+      trailer: req.body.trailer
+    }
+    console.log(obj)
+    await todasLasPeliculasModel.modificarecho(obj, req.body.id);
+    res.redirect("/admin/admin");
+  }
+  catch(error){
+    console.log(error)
+    res.render("admin/editar",{
+      layout: "admin/layout",
+      error: true,
+      message:"no se pudo editar"
+    })
+  }
+})
+
+
 
 module.exports = router;

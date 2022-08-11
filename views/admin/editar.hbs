@@ -1,0 +1,74 @@
+ <h1>editar pelicula</h1>
+ <form action="/admin/admin/editar" method="POST" enctype="multipart/form-data" style="margin: 0px 30px ;">
+                                 <input type="hidden" value="{{producto.id}}"name="id">
+
+                    <section class="categorias">
+                        
+                        <article class="Datos-producto">
+                           
+                            <div class="nombre">
+                                <label for="titulo">Titulo</label>
+                                <input type="text" name="titulo" id="nombreP" value="{{producto.titulo}}">
+                                
+                            </div>
+                            <div class="description">
+                                <label for="sinopsis">Sinopsis</label>
+                                <input type="text" name="sinopsis"  id="marcaP" value="{{producto.sinopsis}}">
+                                
+                            </div>
+                              <div class="description">
+                                <label for="trailer">Trailer</label>
+                                <input type="text" name="trailer"  id="marcaP" value="{{producto.trailer}}" >
+                                
+                            </div>
+        
+                            <div class="precio">
+                                <label for="estrellas">Estrellas</label>
+                                <input type="number" name="estrellas" value ="{{producto.estrellas}}" >
+                                
+                            </div>
+                        </article>
+                        
+                        
+                        <article><label for="plataformas">plataformas para ver</label>
+                            
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="{{producto.Plataformasparaver}}">plataformas</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="{{producto.Plataformasparaver}}">Disney Plus</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="{{producto.Plataformasparaver}}">Amazon Prime</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="{{producto.Plataformasparaver}}">Netflix</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="{{producto.Plataformasparaver}}">Cuevana</div>
+                        </article>
+                         <article><label for="categorias">categorias</label>
+                            
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="{{producto.etiquetas}}">Aventura</div>
+                         <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="{{producto.etiquetas}}">Accion</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="{{producto.etiquetas}}">Misterio</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="{{producto.etiquetas}}">Terror</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="{{producto.etiquetas}}">Suspenso</div>
+                        
+                        </article>
+
+            
+                    </section>
+                    
+                   
+                        <section>
+                            <article class="carga-fotos">
+                                <label for="">Fecha de estreno</label><input name="estreno" type="datetime-local" value="{{producto.estreno}}">
+                                <label for="imaegnes">Subir imágenes</label>
+                                <input id="imagenP" type="file" name="imaegnes" accept="image/*" value="{{producto.imagenes}}">
+                            </article>
+                        </section>
+                        <article class="boton-carga-producto">
+                            <label for="producto-nuevo" method=""></label>
+                            <button class="boton-guardar-producto" type="submit">actualizar pelicula</button>
+                        </article>
+                        <article class="boton-carga-producto">
+                            <label for="volverAtrás" method=""></label>
+                            <a href='/admin/admin' class="botonVistaAdministrador">Volver a la vista de administrador</a>
+                        </article>
+                    </section>
+                </form>
+                {{#if error}}
+                <p>{{message}}</p>
+                {{/if}}

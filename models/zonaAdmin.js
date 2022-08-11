@@ -19,5 +19,28 @@ async function agregarProducto(obj){
         throw error;
     }
 }
+async function borrar(id){
+    let query = "delete from peliculas where id = ?";
+    let rows = await pool.query(query, [id]);
+    return rows
+}
 
-module.exports = {todasLasPeliculas, agregarProducto}
+async function actualizar(id) {
+    let query = "select * from peliculas where id = ?"
+    let rows = await pool.query(query, [id]);
+    return rows[0]
+}
+
+async function modificarecho(obj, id){
+    try{
+        let query = "update peliculas set ? where id=?";
+        let rows = await pool.query(query, [obj, id]);
+        return rows;
+    }catch(error){
+        throw error
+    }
+}
+
+
+
+module.exports = {todasLasPeliculas, agregarProducto, borrar, actualizar, modificarecho}
