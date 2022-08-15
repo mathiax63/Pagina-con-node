@@ -1,6 +1,6 @@
  <h1>editar pelicula</h1>
- <form action="/admin/admin/editar" method="POST" enctype="multipart/form-data" style="margin: 0px 30px ;">
-                                 <input type="hidden" value="{{producto.id}}"name="id">
+ <form action="/admin/admin/editar" method="POST"  style="margin: 0px 30px ;">
+                                  <input type="hidden" value="{{producto.id}}"name="id">
 
                     <section class="categorias">
                         
@@ -30,21 +30,21 @@
                         </article>
                         
                         
-                        <article><label for="plataformas">plataformas para ver</label>
+                       <article><label for="plataformas">plataformas para ver</label>
                             
-                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="{{producto.Plataformasparaver}}">plataformas</div>
-                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="{{producto.Plataformasparaver}}">Disney Plus</div>
-                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="{{producto.Plataformasparaver}}">Amazon Prime</div>
-                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="{{producto.Plataformasparaver}}">Netflix</div>
-                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="{{producto.Plataformasparaver}}">Cuevana</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="hbo_max" {{#if producto.plataformas.hbo_max}}checked{{/if}}>Hbo Max</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="disney_plus" {{#if producto.plataformas.disney_plus}}checked{{/if}}>Disney Plus</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="amazon_prime" {{#if producto.plataformas.amazon_prime}}checked{{/if}}>Amazon Prime</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="netflix" {{#if producto.plataformas.netflix}}checked{{/if}}>Netflix</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="Plataformasparaver" value="cuevana" {{#if producto.plataformas.cuevana}}checked{{/if}}>Cuevana</div>
                         </article>
                          <article><label for="categorias">categorias</label>
                             
-                        <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="{{producto.etiquetas}}">Aventura</div>
-                         <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="{{producto.etiquetas}}">Accion</div>
-                        <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="{{producto.etiquetas}}">Misterio</div>
-                        <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="{{producto.etiquetas}}">Terror</div>
-                        <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="{{producto.etiquetas}}">Suspenso</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="aventura" {{#if producto.etiquetas.aventura}}checked{{/if}}>Aventura</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="accion" {{#if producto.etiquetas.accion}}checked{{/if}}>Accion</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="misterio" {{#if producto.etiquetas.misterio}}checked{{/if}}>Misterio</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="terror" {{#if producto.etiquetas.terror}}checked{{/if}}>Terror</div>
+                        <div class="checkbox"><input class="checkbox" type="checkbox" name="etiquetas" value="suspenso" {{#if producto.etiquetas.suspenso}}checked{{/if}}>Suspenso</div>
                         
                         </article>
 
@@ -55,8 +55,8 @@
                         <section>
                             <article class="carga-fotos">
                                 <label for="">Fecha de estreno</label><input name="estreno" type="datetime-local" value="{{producto.estreno}}">
-                                <label for="imaegnes">Subir imágenes</label>
-                                <input id="imagenP" type="file" name="imaegnes" accept="image/*" value="{{producto.imagenes}}">
+                                <label for="imagenes">Subir imágenes</label>
+                                <input id="imagenP" type="file" name="imagenes" accept="image/*" value="{{producto.imagenes}}">
                             </article>
                         </section>
                         <article class="boton-carga-producto">

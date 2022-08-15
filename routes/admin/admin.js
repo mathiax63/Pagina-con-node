@@ -30,11 +30,27 @@ router.get("/agregar", function (req, res){
   })
 })
 
+
+
+
+
 router.post("/agregar", async function(req, res, next) {
+  console.log(req.body)
 try{
-  if(req.body.titulo != "" && req.body.sinopsis != "" && req.body.etiquetas != ""){
+
+
+  if(req.body.titulo != "" && req.body.sinopsis != ""){
+      //estos if array.isArray sirven para los checkbox
+    if (Array.isArray(req.body.Plataformasparaver)) {
+      req.body.Plataformasparaver = req.body.Plataformasparaver.join(',')
+    }
+    
+    if (Array.isArray(req.body.etiquetas)) {
+      req.body.etiquetas = req.body.etiquetas.join(',')
+    }
+    
     await todasLasPeliculasModel.agregarProducto(req.body);
-    res.redirect("/admin/agregar")
+    res.redirect("/admin/admin")
   } else {
     res.render("admin/agregar", {
       layout: "admin/layout",
@@ -43,7 +59,8 @@ try{
     })
   }
 } catch (error){
-  console.log("admin/agregar", {
+  console.log(error)
+  res.render("admin/agregar", {
     layout: "admin/layout",
     error: true,
     message: "no se cargo"
@@ -58,23 +75,70 @@ router.get("/eliminar/:id", async(req, res, next) =>{
 })
 
 router.get("/editar/:id", async (req, res, next) =>{
+  const plataformas = [
+    'hbo_max',
+    'disney_plus',
+    'amazon_Prime',
+    'netflix',
+    'cuevana'
+  ]
+
+  const etiquetas = [
+    'aventura',
+    'accion',
+    'misterio',
+    'terror',
+    'suspenso',
+  ]
+
+
+
   let id = req.params.id;
-  console.log(req.params.id);
   let producto = await todasLasPeliculasModel.actualizar(id)
-  console.log(req.params.id)
+  producto.Plataformasparaver = producto.Plataformasparaver.split(',')
+  producto.plataformas = {};
+  plataformas.forEach(plataforma => {
+    if (producto.Plataformasparaver.includes(plataforma)) {
+      producto.plataformas[plataforma] = true;
+    } else {
+      producto.plataformas[plataforma] = false;
+    }
+  })
+  producto.etiquetas_arr = producto.etiquetas.split(',')
+  producto.etiquetas = {};
+  etiquetas.forEach(etiqueta => {
+    if (producto.etiquetas_arr.includes(etiqueta)) {
+      producto.etiquetas[etiqueta] = true;
+    } else {
+      producto.etiquetas[etiqueta] = false;
+    }
+  })
+
+  producto.estreno = `${producto.estreno.toISOString().substring(0,10)} ${producto.estreno.toISOString().substring(11,16)}`;
+  
   res.render("admin/editar", {
     layout: "admin/layout",
     producto
   })
 })
 
-router.post("/editar", async (req, res, next) =>{
+router.post("/editar", async (req, res, next) => {
+  if (Array.isArray(req.body.Plataformasparaver)) {
+    req.body.Plataformasparaver = req.body.Plataformasparaver.join(',')
+  }
+  
+  if (Array.isArray(req.body.etiquetas)) {
+    req.body.etiquetas = req.body.etiquetas.join(',')
+  }
+
   try{
     let obj = {
       titulo: req.body.titulo,
       sinopsis: req.body.sinopsis,
       estrellas: req.body.estrellas,
-      trailer: req.body.trailer
+      trailer: req.body.trailer,
+      Plataformasparaver: req.body.Plataformasparaver,
+      etiquetas: req.body.etiquetas
     }
     console.log(obj)
     await todasLasPeliculasModel.modificarecho(obj, req.body.id);
@@ -93,3 +157,4 @@ router.post("/editar", async (req, res, next) =>{
 
 
 module.exports = router;
+
